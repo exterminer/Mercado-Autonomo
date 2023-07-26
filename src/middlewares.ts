@@ -8,7 +8,7 @@ const checkName = (
 ): Response | void => {
   const { name } = req.body;
   const duplicateProduct = market.find((product) => {
-    console.log(product)
+    
     return product.name == name;
   });
   if (duplicateProduct) {
