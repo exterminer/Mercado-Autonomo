@@ -10,7 +10,7 @@ app.listen(Port, (): void =>
 );
 
 app.get("/products", logics.getAll);
-app.post("/product", middlewares.checkName, logics.create);
+app.post("/products", middlewares.checkName, logics.create);
 app.get("/products/:id", middlewares.checkID, logics.getOne);
 app.patch("/products/:id", middlewares.checkID, logics.patchOne);
 app.delete("/products/:id", middlewares.checkID, logics.deleteProduct);
