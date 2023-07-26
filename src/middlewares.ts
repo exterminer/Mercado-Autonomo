@@ -7,9 +7,9 @@ const checkName = (
   next: NextFunction
 ): Response | void => {
   const { name } = req.body;
-  const duplicateProduct = market.find((product) => {
+  const duplicateProduct = market.find((products) => {
     
-    return product.name == name;
+    return products.name == name;
   });
   if (duplicateProduct) {
     return res.status(409).json({error :"Product already registered."});
@@ -23,7 +23,7 @@ const checkID = (
   next: NextFunction
 ): Response | void => {
   const { id } = req.params;
-  const product = market.find((product) => product.id.toString() === id);
+  const product = market.find((products) => products.id.toString() === id);
   if (product) {
     next();
   } else {
