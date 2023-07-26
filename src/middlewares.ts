@@ -1,15 +1,18 @@
 import { NextFunction, Request, Response } from "express";
 import market from "./databases";
 
-
 const checkName = (
   req: Request,
   res: Response,
   next: NextFunction
 ): Response | void => {
   const { name } = req.body;
-  if (market.includes(name)) {
-    return res.status(400).json({ error: "Product already registered." });
+  const duplicateProduct = market.find((product) => {
+    console.log(product)
+    return product.name == name;
+  });
+  if (duplicateProduct) {
+    return res.status(400).json({error :"Product already registered."});
   }
   next();
 };
