@@ -2,9 +2,9 @@ interface Product {
   id: number;
   name: string;
   price: number;
-  weigth: number;
-  section: string;
-  calories: number;
+  weight: number;
+  section: "food" | "cleaning"
+  calories?: number;
   expirationDate: Date;
 }
 

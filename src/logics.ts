@@ -3,10 +3,13 @@ import market from "./databases";
 import { Product } from "./interfaces";
 
 const create = (req: Request, res: Response): Response => {
+  const expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + 365);
+
   const newProduct: Product = {
     ...req.body,
     id: market.length + 1,
-    expirationDate: new Date(),
+    expirationDate
   };
   market.push(newProduct);
 
@@ -36,7 +39,7 @@ const patchOne = (req: Request, res: Response): Response => {
     ...market[product],
     name: name || market[product].name,
     price: price || market[product].price,
-    weight: weight || market[product].weigth,
+    weight: weight || market[product].weight,
     calories: calories || market[product].calories,
   };
 

@@ -12,7 +12,7 @@ const checkName = (
     return product.name == name;
   });
   if (duplicateProduct) {
-    return res.status(400).json({error :"Product already registered."});
+    return res.status(409).json({error :"Product already registered."});
   }
   next();
 };
