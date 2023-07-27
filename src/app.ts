@@ -12,5 +12,5 @@ app.listen(Port, (): void =>
 app.get("/products", logics.getAll);
 app.post("/products", middlewares.checkName, logics.create);
 app.get("/products/:id", middlewares.checkID, logics.getOne);
-app.patch("/products/:id", middlewares.checkID, logics.patchOne);
-app.delete("/products/:id", middlewares.checkID, logics.deleteProduct);
+app.patch("/products/:id", middlewares.checkID, middlewares.checkName, logics.patchOne,middlewares.checkName);
+app.delete("/products/:id", middlewares.checkID, logics.deleteProduct );

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import market from "./databases";
 import { Product } from "./interfaces";
+import middlewares from "./middlewares";
 
 const create = (req: Request, res: Response): Response => {
   const expirationDate = new Date();
@@ -9,7 +10,7 @@ const create = (req: Request, res: Response): Response => {
   const newProduct: Product = {
     ...req.body,
     id: market.length + 1,
-    expirationDate
+    expirationDate,
   };
   market.push(newProduct);
 
@@ -17,7 +18,11 @@ const create = (req: Request, res: Response): Response => {
 };
 
 const getAll = (req: Request, res: Response): Response => {
-  return res.status(200).json({ total: market.length, market });
+  const total = market.reduce(
+    (accumulator, product) => accumulator + product.price,
+    0
+  );
+  return res.status(200).json({ total, products: market });
 };
 
 const getOne = (req: Request, res: Response): Response => {
@@ -43,6 +48,7 @@ const patchOne = (req: Request, res: Response): Response => {
     calories: calories || market[product].calories,
   };
 
+  
   market[product] = updatedProduct;
 
   return res.status(200).json(updatedProduct);
